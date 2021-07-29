@@ -24,7 +24,10 @@ def get_greatest(number_list):
             >>> bm.get_greatest(number_list)
             99
     """
-    greatest_number = None
+    greatest_number = -999999
+    for value_greatest in number_list:
+        if value_greatest > greatest_number:
+            greatest_number = value_greatest
     return greatest_number
 
 
@@ -45,7 +48,10 @@ def get_smallest(number_list):
             >>> bm.get_smallest(number_list)
             11
     """
-    smallest_number = None
+    smallest_number = 999999
+    for value_greatest in number_list:
+        if value_greatest < smallest_number:
+            smallest_number = value_greatest
     return smallest_number
 
 
@@ -66,7 +72,14 @@ def get_mean(number_list):
             >>> bm.get_mean(number_list)
             47
     """
-    mean = None
+    mean = 0
+    value_number = 0
+    for i in number_list:
+        value_number += i
+        # print("value_numer = ", value_number)
+    else:
+        mean = value_number/len(number_list)
+        # print(len(number_list))
     return mean
 
 
@@ -90,5 +103,34 @@ def get_median(number_list):
             >>> bm.get_median(number_list2)
             35.5
     """
-    median = None
+    median = 0
+    compare_value = 0
+    if len(number_list)%2 == 0:
+        for i in range(0,len(number_list)):
+            compare_value = number_list[i]
+            for j in range(0,len(number_list)):
+                if j+i > len(number_list)-1:
+                    break
+                elif number_list[i] > number_list[j+i]:
+                    number_list[i] = number_list[j+i]
+                    number_list[j+i] = compare_value
+                    compare_value = number_list[i]
+                    # print(f"number_list : {number_list} i = {i}, j = {j}")
+
+        else:
+            median = (number_list[int(len(number_list)/2)]+number_list[int(len(number_list)/2-1)])/2
+    else:
+        for i in range(0,len(number_list)):
+            compare_value = number_list[i]
+            for j in range(0,len(number_list)):
+                if j+i > len(number_list)-1:
+                    break
+                elif number_list[i] > number_list[j+i]:
+                    
+                    number_list[i] = number_list[j+i]
+                    number_list[j+i] = compare_value
+                    compare_value = number_list[i]
+                    # print(f"number_list : {number_list} i = {i}, j = {j}")
+        else:
+            median = number_list[int(len(number_list)/2)]
     return median
